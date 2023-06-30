@@ -41,6 +41,16 @@ class RewardService (
     }
 
     /**
+     * @todo - This is a batch process, so really that should mean all or nothing. I handled the errors here,
+     * but I would also need to rollback any changes made in the case where I might lose connection to the Mongo
+     * half way through a process. The later in-memory pre-process function does handle this a little better
+     * because it is submitting the entire change for a user document in one go, so in the event of an error where
+     * the file is aborted halfway through we could just change the logic to overwrite a document if it already exists
+     * so we can run the file over again (in this case we are assuming here that the file contains a total month and
+     * not a partial amount for the month)
+     */
+
+    /**
      * In here I have three different methods because I wanted to test speed differences for writing
      * large csv files to mongo. This is the most plain-jane one. I simply take the file and write line by
      * line into mongo. This is pretty far from performant, and I found that loading a file almost 200MB into mongo
