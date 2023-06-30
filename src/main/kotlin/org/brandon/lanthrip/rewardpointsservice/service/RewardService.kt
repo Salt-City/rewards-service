@@ -145,7 +145,7 @@ class RewardService (
     }
 
     /**
-     * This is the most memory intensive, but I can load over 6k documents with ~300 rewards each into a db
+     * This is the most memory intensive, but I can load over 6k documents with ~300 rewards (2.2 million records) each into a db
      * in < 1 minute. I could most likely further improve this by using coroutines, since now we have pre-processed and
      * grouped the records by document
      */
